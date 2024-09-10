@@ -24,6 +24,10 @@ function App() {
     console.log('in onCancelClick()');
   };
 
+ const onCustomer = () => {
+    console.log('in handleListClick');
+  };
+
   return (
     <div className='card-container'>
       <div className='customer_table'>
@@ -38,7 +42,7 @@ function App() {
             </thead>
             <tbody>
               {dataArray.map((customer, index) => (
-                <tr key = {index}>
+                <tr key = {index} onClick={() => onCustomer(customer)}>
                   <td>{customer.name}</td>
                   <td>{customer.email}</td>
                   <td>{customer.password}</td>
