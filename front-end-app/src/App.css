@@ -1,38 +1,91 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.card-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 40px;
+  padding: 20px;
+}
+
+/* Styles for the customer table section */
+.customer_table,
+.customer_form {
+  flex: 1;
+  margin-right: 10px; /* Spacing between sections */
+  padding: 20px;
+  border: 1px solid #ccc; /* Border to create a box */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+
+}
+
+.customer_table h5,
+.customer_form h5 {
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 10px;
+  color: blue;
+  font-family: courier;
+  font-size: 160%;
+}
+
+table {
+  width: 90%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+form { 
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px; 
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 10px; background-color: #f9f9f9; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  gap: 15px;
+ }
+
+ .form-group{
+  display: flex;
+  flex-direction: column;
+ }
+ label {
+  margin-bottom: 5px;
+ }
+
+ input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 60%;
+  box-sizing: border-box;
+ }
+
+ button {
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
   color: white;
-}
+  border-radius: 5px;
+  width: 80px;
+ }
 
-.App-link {
-  color: #61dafb;
-}
+ .buttons-container{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
+ }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+ button:hover {
+  background-color: #0056b3;
+ }
