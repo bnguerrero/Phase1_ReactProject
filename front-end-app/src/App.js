@@ -17,15 +17,11 @@ function App() {
     password: ''
   });
 
-
+/* when clicking on customr in talbe, will either select them in bold 
+  or deselect them*/
   const onCustomerClick = (selectedCustomer) => {
-    if (customer && customer.name === selectedCustomer.name) {
-      setCustomer(null);
-      setCustomerData({
-        name: '',
-        email: '',
-        password: ''
-      });
+    if (customer != null && customer.name === selectedCustomer.name) {
+      onCancelClick();
     } else {
       setCustomer(selectedCustomer);
       setCustomerData({
@@ -55,8 +51,15 @@ function App() {
     console.log('in onSaveClick()');
   };
 
+  /* when click cancel button, deselects customer in table
+    and clears input */
   const onCancelClick = () => {
-    console.log('in onCancelClick()');
+    setCustomer(null);
+    setCustomerData({
+      name: '',
+      email: '',
+      password: ''
+      });
   };
 
   const onCustomer = () => {
@@ -126,13 +129,7 @@ function App() {
           <div className="buttons-container">
             <button type="button" onClick={onDeleteClick}>Delete</button>
             <button type="button" onClick={onSaveClick}>Save</button>
-            <button type="button" onClick={() => {
-              setCustomerData({
-                name: '',
-                email: '',
-                password: ''
-              });
-            }} >Cancel</button>
+            <button type="button" onClick = {onCancelClick}>Cancel</button>
           </div>
         </form>
       </div>
