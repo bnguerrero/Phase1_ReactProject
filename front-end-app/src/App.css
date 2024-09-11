@@ -9,13 +9,17 @@
 .customer_table,
 .customer_form {
   flex: 1;
-  margin-right: 10px; /* Spacing between sections */
+  margin-right: 10px;
+  /* Spacing between sections */
   padding: 20px;
-  border: 1px solid #ccc; /* Border to create a box */
-  border-radius: 10px; /* Rounded corners */
-  background-color: #f9f9f9; /* Light background color */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
-
+  border: 1px solid #ccc;
+  /* Border to create a box */
+  border-radius: 10px;
+  /* Rounded corners */
+  background-color: #f9f9f9;
+  /* Light background color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Optional shadow */
 }
 
 .customer_table h5,
@@ -23,7 +27,7 @@
   margin-top: 0;
   padding-top: 0;
   margin-bottom: 10px;
-  color: blue;
+  color: rgb(22, 74, 187);
   font-family: courier;
   font-size: 160%;
 }
@@ -31,9 +35,11 @@
 table {
   width: 90%;
   border-collapse: collapse;
+  table-layout: fixed; /* fixed issue of table size changing*/
 }
 
-table th, table td {
+table th,
+table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -43,49 +49,51 @@ table th {
   background-color: #f2f2f2;
 }
 
-form { 
+form {
   display: flex;
   flex-direction: column;
-  margin-top: 10px; 
-  padding: 20px; 
-  border: 1px solid #ccc; 
-  border-radius: 10px; background-color: #f9f9f9; 
+  margin-top: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   gap: 15px;
- }
+}
 
- .form-group{
+.form-group {
   display: flex;
   flex-direction: column;
- }
- label {
-  margin-bottom: 5px;
- }
+}
 
- input {
+label {
+  margin-bottom: 5px;
+}
+
+input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 60%;
   box-sizing: border-box;
- }
+}
 
- button {
+button {
   padding: 10px;
   border: none;
   background-color: #007bff;
   color: white;
   border-radius: 5px;
   width: 80px;
- }
+}
 
- .buttons-container{
+.buttons-container {
   display: flex;
   flex-direction: row;
   gap: 10px;
   margin-top: 20px;
- }
+}
 
- button:hover {
+button:hover {
   background-color: #0056b3;
- }
+}
