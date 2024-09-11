@@ -35,7 +35,8 @@
 table {
   width: 90%;
   border-collapse: collapse;
-  table-layout: fixed; /* fixed issue of table size changing*/
+  table-layout: fixed;
+  /* fixed issue of table size changing*/
 }
 
 table th,
