@@ -117,6 +117,7 @@ function App() {
               className="form-control"
               id="name"
               name="name"
+              placeholder="Customer Name"
               value={customerData.name}
               onChange={handleInputChange}
             />
@@ -128,6 +129,7 @@ function App() {
               className="form-control"
               id="email"
               name="email"
+              placeholder= "name@company.com"
               value={customerData.email}
               onChange={handleInputChange}
             />
@@ -139,6 +141,7 @@ function App() {
               className="form-control"
               id="pass"
               name="password"
+              placeholder="password"
               value={customerData.password}
               onChange={handleInputChange}
             />
