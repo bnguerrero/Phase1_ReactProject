@@ -6,55 +6,68 @@ const AddCustomer = ({AddCustomer}) => {
         email: '',
         password: ''
     });
+    
+    // Handle input changes dynamically
+    const handleChange = (e) => {
+      const { name, value } = e.target;
 
-      // Handle input changes dynamically
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    // Update the state with the new input value
-    setCustomerData({
-      ...customerData,
-      [name]: value,
-    });
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Add a timestamp or any other metadata if needed
-    const submission = {
-      ...customerData,
-      addedTimestamp: new Date().toISOString(),
+      // Update the state with the new input value
+      setCustomerData({
+        ...customerData,
+        [name]: value,
+      });
     };
 
-    // Example: Call API to submit data
-    try {
-      const response = await fetch('https://api.example.com/customers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(submission),
-      });
+    // Handle form submission
+    const handleSubmit = async (e) => {
+      e.preventDefault();
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
+      // Add a timestamp or any other metadata if needed
+      const submission = {
+        ...customerData,
+        addedTimestamp: new Date().toISOString(),
+      };
+
+      // Example: Call API to submit data
+      try {
+        const response = await fetch('https://api.example.com/customers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(submission),
+        });
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        
+        const result = await response.json();
+        console.log('Customer added successfully', result);
+
+        // Optionally clear form or handle success message
+        setCustomerData({
+          name: '',
+          email: '',
+          password: ''
+        });
+      } catch (error) {
+        console.error('Error adding customer:', error);
       }
+    };
 
-      const result = await response.json();
-      console.log('Customer added successfully', result);
+    /*these functions will display messages on the console depending
+     if the button selected is  Delete, Save, or Cancel*/
+    const onDeleteClick = () => {
+      console.log('in onDeleteClick()');
+    };
 
-      // Optionally clear form or handle success message
-      setCustomerData({
-        name: '',
-        email: '',
-        password: ''
-      });
-    } catch (error) {
-      console.error('Error adding customer:', error);
-    }
-  };
+    const onSaveClick = () => {
+      console.log('in onSaveClick()');
+    };
+    
+    const onCancelClick = () => {
+      console.log('in onCancelClick()');
+    };
 
     return (
         <div>
@@ -87,9 +100,9 @@ const AddCustomer = ({AddCustomer}) => {
                         name = "pass"
                     />
                 </div>
-                <button type="submit">Delete</button>
-                <button type="submit">Save</button>
-                <button type="submit">Cancel</button>
+                <button type="button" onClick={onDeleteClick}>Delete</button>
+                <button type="button" onClick={onSaveClick}>Save</button>
+                <button type="button" onClick={onCancelClick}>Cancel</button>
             </form>
         </div>
     )
