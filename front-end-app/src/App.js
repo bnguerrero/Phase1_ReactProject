@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import * as memDB from './assets/memdb';
 
@@ -6,19 +6,21 @@ function App() {
 
   const [customers, setCustomers] = useState([]);
   const [customer, setCustomer] = useState(null);
-  const [customerData, setCustomerData] = useState({
+  const blankCustomer = {
+    id: -1,
     name: '',
     email: '',
     password: ''
-  });
+  }
+  const [customerData, setCustomerData] = useState(blankCustomer);
 
-  const getCustomers = function(){
+  const getCustomers = function () {
     console.log('in getCustomers()');
     const allCustomers = memDB.getAll();
     setCustomers(allCustomers);
   }
 
-  useEffect (() => {
+  useEffect(() => {
     getCustomers();
   }, []);
 
@@ -26,10 +28,11 @@ function App() {
     or deselect them*/
   const onCustomerClick = (selectedCustomer) => {
     if (customer != null && customer.name === selectedCustomer.name) {
-      onCancelClick();
+      clearForm();
     } else {
       setCustomer(selectedCustomer);
       setCustomerData({
+        id: selectedCustomer.id,
         name: selectedCustomer.name,
         email: selectedCustomer.email,
         password: selectedCustomer.password
@@ -39,6 +42,7 @@ function App() {
 
   // function for handling input changes in the form
   const handleInputChange = (e) => {
+    console.log('in handleInputChange()');
     const { name, value } = e.target;
     setCustomerData((prevData) => ({
       ...prevData,
@@ -49,23 +53,35 @@ function App() {
   /*these functions will display messages on the console depending 
   if the button selected is  Delete, Save, or Cancel */
   const onDeleteClick = () => {
-    console.log('in onDeleteClick()');
+    if (customer != null) {
+      memDB.deleteById(customer.id);
+      clearForm();
+    }
   };
 
   const onSaveClick = () => {
-    console.log('in onSaveClick()');
+    if (mode == 'Add Customer'){
+      memDB.post(customerData);
+    } else {
+      memDB.put(customerData.id, customerData);
+    }
+    clearForm();
+    setCustomers(memDB.getAll());
   };
 
   /* when click cancel button, deselects customer in table
     and clears input */
   const onCancelClick = () => {
-    setCustomer(null);
-    setCustomerData({
-      name: '',
-      email: '',
-      password: ''
-    });
+    clearForm();
   };
+
+  const clearForm = () => {
+    setCustomer(null);
+    setCustomerData(blankCustomer);
+  };
+
+  // changes form mode if there is a customer selected or not
+  const mode = customer == null? 'Add Customer' : 'Update Customer';
 
   return (
     <div className='card-container'>
@@ -92,7 +108,7 @@ function App() {
         </table>
       </div>
       <div className='customer_form'>
-        <h5> Update</h5>
+        <h5> {mode}</h5>
         <form className="p-3">
           <div className="form-group">
             <label htmlFor="name">Name: </label>
@@ -122,7 +138,7 @@ function App() {
               type="text"
               className="form-control"
               id="pass"
-              name="pass"
+              name="password"
               value={customerData.password}
               onChange={handleInputChange}
             />
