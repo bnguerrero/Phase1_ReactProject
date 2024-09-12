@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import './App.css';
+import * as memDB from './assets/memdb';
 
 function App() {
 
-  // Static array of data
-  const dataArray = [
-    { name: 'Jack Jackson', email: 'jackj@abc.com', password: 'jackj' },
-    { name: 'Katie Kates', email: 'katieK@abc.com', password: 'katiek' },
-    { name: 'Gen Glenns', email: 'gleng@abc.come', password: 'gleng' }
-  ];
-
+  const [customers, setCustomers] = useState([]);
   const [customer, setCustomer] = useState(null);
   const [customerData, setCustomerData] = useState({
     name: '',
@@ -17,8 +12,18 @@ function App() {
     password: ''
   });
 
-/* when clicking on customr in talbe, will either select them in bold 
-  or deselect them*/
+  const getCustomers = function(){
+    console.log('in getCustomers()');
+    const allCustomers = memDB.getAll();
+    setCustomers(allCustomers);
+  }
+
+  useEffect (() => {
+    getCustomers();
+  }, []);
+
+  /* when clicking on customer in talbe, will either select them in bold 
+    or deselect them*/
   const onCustomerClick = (selectedCustomer) => {
     if (customer != null && customer.name === selectedCustomer.name) {
       onCancelClick();
@@ -59,11 +64,7 @@ function App() {
       name: '',
       email: '',
       password: ''
-      });
-  };
-
-  const onCustomer = () => {
-    console.log('in handleListClick');
+    });
   };
 
   return (
@@ -79,9 +80,9 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {dataArray.map((customerItem, index) => (
+            {customers.map((customerItem, index) => (
               <tr key={index} onClick={() => onCustomerClick(customerItem)}
-              style={{fontWeight: customer && customer.name === customerItem.name ? 'bold': 'normal'}}>
+                style={{ fontWeight: customer && customer.name === customerItem.name ? 'bold' : 'normal' }}>
                 <td>{customerItem.name}</td>
                 <td>{customerItem.email}</td>
                 <td>{customerItem.password}</td>
@@ -129,7 +130,7 @@ function App() {
           <div className="buttons-container">
             <button type="button" onClick={onDeleteClick}>Delete</button>
             <button type="button" onClick={onSaveClick}>Save</button>
-            <button type="button" onClick = {onCancelClick}>Cancel</button>
+            <button type="button" onClick={onCancelClick}>Cancel</button>
           </div>
         </form>
       </div>
