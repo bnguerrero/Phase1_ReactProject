@@ -63,7 +63,7 @@ function App() {
   };
 
   const onSaveClick = () => {
-    if (mode == 'Add Customer') {
+    if (mode === 'Add Customer') {
       memDB.post(customerData);
     } else {
       memDB.put(customerData.id, customerData);
