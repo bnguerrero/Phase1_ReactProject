@@ -12,20 +12,25 @@ const CustomerList = (props) => {
                         <th>Password </th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    {props.data.map((customer, index) => (
-                        <tr key={index}
-                            onClick={() => props.onCustomerClick(customer)}
-                            style={{
-                                fontWeight: props.selectedCustomer &&
-                                    props.selectedCustomer.name === customer.name ? 'bold' : 'normal'
-                            }}
-                        >
-                            <td>{customer.name}</td>
-                            <td>{customer.email}</td>
-                            <td>{customer.password}</td>
+                    {props.data && props.data.length > 0 ? (
+                        props.data.map((customer, index) => (
+                            <tr key={index} onClick={() => props.onCustomerClick(customer)}
+                                style={{
+                                    fontWeight: props.selectedCustomer &&
+                                        props.selectedCustomer.name === customer.name ? 'bold' : 'normal'
+                                }}>
+                                <td>{customer.name}</td>
+                                <td>{customer.email}</td>
+                                <td>{customer.password}</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="3">No customers available</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>

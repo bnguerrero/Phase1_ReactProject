@@ -58,6 +58,7 @@ function App() {
     if (customerData != null) {
       memDB.deleteById(customerData.id);
       setCustomerData(blankCustomer);
+      setCustomers(memDB.getAll());
     }
   };
 
@@ -85,12 +86,14 @@ function App() {
 
   return (
     <div className='card-container'>
-      <CustomerList data={customers}
+      <CustomerList 
+        data={customers}
         selectedCustomer={customerData}
         onCustomerClick={onCustomerClick}
       />
 
-      <CustomerAddUpdateForm customerData={customerData}
+      <CustomerAddUpdateForm 
+        customerData={customerData}
         handleInputChange={handleInputChange}
         onSaveClick={onSaveClick}
         onDeleteClick={onDeleteClick}
