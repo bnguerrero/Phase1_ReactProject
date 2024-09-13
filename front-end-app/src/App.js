@@ -14,7 +14,6 @@ function App() {
     password: ''
   }
 
-  //FORM OBJECT
   const [customerData, setCustomerData] = useState(blankCustomer);
 
   const getCustomers = function () {
@@ -55,7 +54,7 @@ function App() {
   /*these functions will display messages on the console depending 
   if the button selected is  Delete, Save, or Cancel */
   const onDeleteClick = () => {
-    if (customerData != null) {
+    if (customerData.id !== -1) {
       memDB.deleteById(customerData.id);
       setCustomerData(blankCustomer);
       setCustomers(memDB.getAll());
@@ -85,14 +84,15 @@ function App() {
 
 
   return (
-    <div className='card-container'>
-      <CustomerList 
+    <div className='app-background'>
+      <div className='card-container'>
+      <CustomerList
         data={customers}
         selectedCustomer={customerData}
         onCustomerClick={onCustomerClick}
       />
 
-      <CustomerAddUpdateForm 
+      <CustomerAddUpdateForm
         customerData={customerData}
         handleInputChange={handleInputChange}
         onSaveClick={onSaveClick}
@@ -100,8 +100,7 @@ function App() {
         onCancelClick={onCancelClick}
         mode={mode}
       />
-
-
+    </div>
     </div>
   );
 }
