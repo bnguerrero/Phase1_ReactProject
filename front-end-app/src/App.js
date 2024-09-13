@@ -4,16 +4,17 @@ import * as memDB from './assets/memdb';
 
 function App() {
 
-  const [customers, setCustomers] = useState([]);
-  const [customer, setCustomer] = useState(null);
+  const [customers, setCustomers] = useState([]); // for list of all customers
+  const [customer, setCustomer] = useState(null); //holds selected customer object
   const blankCustomer = {
     id: -1,
     name: '',
     email: '',
     password: ''
   }
-  const [customerData, setCustomerData] = useState(blankCustomer);
+  const [customerData, setCustomerData] = useState(blankCustomer); // form data for customer
 
+  // returns all customers from memDB
   const getCustomers = function () {
     console.log('in getCustomers()');
     const allCustomers = memDB.getAll();
@@ -28,9 +29,10 @@ function App() {
     or deselect them*/
   const onCustomerClick = (selectedCustomer) => {
     if (customer != null && customer.name === selectedCustomer.name) {
-      clearForm();
+      clearForm(); // clear form if customer is already selected
     } else {
-      setCustomer(selectedCustomer);
+      // selects the clicked customer and fill form with its data
+      setCustomer(selectedCustomer); 
       setCustomerData({
         id: selectedCustomer.id,
         name: selectedCustomer.name,
@@ -59,6 +61,9 @@ function App() {
     }
   };
 
+   // changes form mode if there is a customer selected or not
+  const mode = customer == null? 'Add Customer' : 'Update Customer';
+  
   const onSaveClick = () => {
     if (mode == 'Add Customer'){
       memDB.post(customerData);
@@ -80,8 +85,6 @@ function App() {
     setCustomerData(blankCustomer);
   };
 
-  // changes form mode if there is a customer selected or not
-  const mode = customer == null? 'Add Customer' : 'Update Customer';
 
   return (
     <div className='card-container'>
